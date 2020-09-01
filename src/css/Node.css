@@ -1,0 +1,9 @@
+.node {
+    height: 30px;
+    width: 30px;
+    border: 1px rgb(27, 156, 231) solid;
+    display: inline-block;
+
+    margin-bottom: -5px;
+    margin-right: -1px;
+}
