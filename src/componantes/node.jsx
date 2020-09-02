@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/Node.css'
 
-function Node({ isStart, isFinish }) {
+function Node({ isStart, isFinish, distance, isVisited }) {
     const extendedClassName = isStart ? "start-node" : isFinish ? "finish-node" : "";
 
     return (
