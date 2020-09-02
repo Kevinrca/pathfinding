@@ -1,9 +1,11 @@
 import React from 'react'
 import '../css/Node.css'
 
-function Node() {
+function Node({ isStart, isFinish }) {
+    const extendedClassName = isStart ? "start-node" : isFinish ? "finish-node" : "";
+
     return (
-        <div className="node">
+        <div className={`node ${extendedClassName}`}>
             
         </div>
     )

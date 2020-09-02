@@ -7,3 +7,11 @@
     margin-bottom: -5px;
     margin-right: -1px;
 }
+
+.start-node {
+    background-color: blue;
+}
+
+.finish-node {
+    background-color: red;
+}
