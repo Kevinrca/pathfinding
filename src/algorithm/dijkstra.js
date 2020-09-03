@@ -4,6 +4,7 @@
 
 
 function dijkstra(grid, startNode, finishNode) {
+    // handle unexpected situations
     if(!startNode || !finishNode || startNode === finishNode) {
         return false;
     }
@@ -16,9 +17,11 @@ function dijkstra(grid, startNode, finishNode) {
         sortNodes(unvisitedNodes);
         const closestNode = unvisitedNodes.shift();
 
+        // if we hit a wall, stop and render the next closest node
         if(closestNode.isWall === true) continue;
+        // if we don't have any nodes available, stop and return visitedNodeInOrder
         if(closestNode.distance === Infinity) return visitedNodesInOrder;
-        
+
         closestNode.isVisited = true;
         visitedNodesInOrder.push(closestNode);
 
