@@ -9,13 +9,33 @@
 }
 
 .start-node {
-    background-color: blue;
+    background-color: rgb(32, 181, 240);
 }
 
 .finish-node {
-    background-color: red;
+    background-color: rgb(241, 137, 19);
 }
 
 .node-visited {
     background-color: lightblue;
+    transform: scale(0);
+    border-radius: 50%;
+
+    animation: visitedTransition 0.4s 0s both;
+}
+
+@keyframes visitedTransition {
+    0% {
+        background-color: rgb(96, 231, 130);
+        transform: scale(0);
+        border-radius: 50%;
+    }
+    20% {
+        border-radius: 50%;
+    }
+    100% {
+        background-color: rgb(65, 167, 214);
+        transform: scale(1);
+        border-radius: 0%;
+    }
 }
