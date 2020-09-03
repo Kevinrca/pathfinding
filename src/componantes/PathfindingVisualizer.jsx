@@ -26,6 +26,8 @@ function PathfindingVisualizer() {
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+        console.log(visitedNodesInOrder);
+        return visitedNodesInOrder;
     }
 
 
@@ -40,7 +42,7 @@ function PathfindingVisualizer() {
                 return (
                     <div key={rowIndex}>
                         {row.map((node, nodeIndex) => {
-                            const {row, col, isStart, isFinish, distance, isVisited} = node;
+                            const {row, col, isStart, isFinish, distance, isVisited, previousNode } = node;
                             return (
                                 <Node 
                                     key={nodeIndex}
@@ -91,6 +93,7 @@ function createNode(row, col) {
         isStart: row === START_NODE_ROW && col === START_NODE_COL,
         isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
         distance: Infinity,
-        isVisited: false
+        isVisited: false,
+        previousNode: null
     }
 }
