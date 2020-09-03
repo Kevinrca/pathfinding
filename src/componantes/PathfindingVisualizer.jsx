@@ -14,6 +14,7 @@ const FINISH_NODE_COL = 39;
 function PathfindingVisualizer() {
     // Variables
     const [grid, setGrid] = useState([]);
+    const [mouseIsPressed, setMouseIsPressed] = useState(false);
 
 
     // Create a grid of nodes
@@ -39,9 +40,26 @@ function PathfindingVisualizer() {
             setTimeout(() => {
                 const node = visitedNodesInOrder[i];
                 document.getElementById(`node-${node.row}-${node.col}`).className = "node node-visited"
-            }, 10 * i);
+            }, 15 * i);
         
         }
+    }
+
+
+    function handleMouseDown(row, col) {
+        setMouseIsPressed(true);
+        const newGrid = CreateNewGridWithWalls(grid, row, col);
+        setGrid(newGrid);
+    }
+
+    function handleMouseEnter(row, col) {
+        if(!mouseIsPressed) return;
+        const newGrid = CreateNewGridWithWalls(grid, row, col);
+        setGrid(newGrid);
+    }
+
+    function handleMouseUp() {
+        setMouseIsPressed(false);
     }
 
 
@@ -52,11 +70,12 @@ function PathfindingVisualizer() {
             <button onClick={() => vizualiseDijkstra()}>
                 Vizualise dijkstra algorithm
             </button>
+
             {grid.map((row, rowIndex) => {
                 return (
                     <div key={rowIndex}>
                         {row.map((node, nodeIndex) => {
-                            const {row, col, isStart, isFinish, distance, isVisited } = node;
+                            const {row, col, isStart, isFinish, isVisited, isWall } = node;
                             return (
                                 <Node 
                                     key={nodeIndex}
@@ -64,8 +83,12 @@ function PathfindingVisualizer() {
                                     col={col}
                                     isStart={isStart}
                                     isFinish={isFinish}
-                                    distance={distance}
                                     isVisited={isVisited}
+                                    isWall={isWall}
+                                    mouseIsPressed={mouseIsPressed}
+                                    onMouseDown={(row, col) => handleMouseDown(row, col)}
+                                    onMouseEnter={(row, col) => handleMouseEnter(row, col)}
+                                    onMouseUp={() => handleMouseUp()}
                                 />
                                 )
                         })}
@@ -108,6 +131,21 @@ function createNode(row, col) {
         isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
         distance: Infinity,
         isVisited: false,
-        previousNode: null
+        previousNode: null,
+        isWall: false,
+        onMouseDown: false,
+        onMouseEnter: false,
+        onMouseUp: false
     }
+}
+
+function CreateNewGridWithWalls(grid, row, col) {
+    const newGrid = grid.slice();
+    const node = newGrid[row][col];
+    const newNode = {
+        ...node,
+        isWall: !node.isWall
+    };
+    newGrid[row][col] = newNode;
+    return newGrid;
 }
