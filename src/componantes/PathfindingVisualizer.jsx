@@ -26,8 +26,22 @@ function PathfindingVisualizer() {
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-        console.log(visitedNodesInOrder);
-        return visitedNodesInOrder;
+        
+        animateDijkstra(visitedNodesInOrder);
+    }
+
+    function animateDijkstra(visitedNodesInOrder) {
+        for(let i = 0; i <= visitedNodesInOrder.length; i++) {
+            if(i === visitedNodesInOrder.length) {
+                return;
+            }
+            
+            setTimeout(() => {
+                const node = visitedNodesInOrder[i];
+                document.getElementById(`node-${node.row}-${node.col}`).className = "node node-visited"
+            }, 10 * i);
+        
+        }
     }
 
 
@@ -42,7 +56,7 @@ function PathfindingVisualizer() {
                 return (
                     <div key={rowIndex}>
                         {row.map((node, nodeIndex) => {
-                            const {row, col, isStart, isFinish, distance, isVisited, previousNode } = node;
+                            const {row, col, isStart, isFinish, distance, isVisited } = node;
                             return (
                                 <Node 
                                     key={nodeIndex}
