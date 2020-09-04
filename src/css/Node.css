@@ -52,7 +52,19 @@
 }
 
 .node-shortest-path {
-    background-color: yellow;
+    position: relative;
+}
+.node-shortest-path::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: rgb(235, 235, 35);
+    transform: scale(0.4);
+    border-radius: 30%;
+
+    animation: animateShortestPath 0.3s 0s ease both;
 }
 
 
@@ -80,5 +92,16 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes animateShortestPath {
+    0% {
+        transform: scale(0.4);
+        border-radius: 30%;
+    }
+    100% {
+        transform: scale(1);
+        border-radius: 0%;
     }
 }
