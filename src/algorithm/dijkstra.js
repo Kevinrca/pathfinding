@@ -72,7 +72,7 @@ function getUnvisitedNeighbors(node, grid) {
 }
 
 function getShortestPathInOrder(finishNode) {
-    let shortestPath = [];
+    const shortestPath = [];
     let currentNode = finishNode;
     while(currentNode !== null) {
         shortestPath.unshift(currentNode);

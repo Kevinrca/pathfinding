@@ -53,7 +53,7 @@ function PathfindingVisualizer() {
     function animateShortestPath(shortestPathInOrder) {
         for(let i = 0; i < shortestPathInOrder.length; i++) {
             setTimeout(() => {
-                let node = shortestPathInOrder[i];
+                const node = shortestPathInOrder[i];
                 document.getElementById(`node-${node.row}-${node.col}`).className = "node node-shortest-path";
             }, 20 * i);
         }
