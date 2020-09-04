@@ -1,17 +1,13 @@
 import React from 'react'
 import '../css/Node.css'
 
-function Node({ row, col, isStart, isFinish, isVisited, isWall, onMouseDown, onMouseEnter, onMouseUp, isShortestPath }) {
+function Node({ row, col, isStart, isFinish, isVisited, isWall, onMouseDown, onMouseEnter, onMouseUp }) {
     const extendedClassName = isStart 
         ? "start-node" 
         : isFinish 
-        ? "finish-node" 
-        : isVisited 
-        ? "node-visited" 
+        ? "finish-node"
         : isWall 
         ? "node-wall"
-        : isShortestPath
-        ? "node-shortest-path"
         : "";
 
     return (

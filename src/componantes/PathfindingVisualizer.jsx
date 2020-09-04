@@ -36,17 +36,16 @@ function PathfindingVisualizer() {
             if(i === visitedNodesInOrder.length) {
                 setTimeout(() => {
                     animateShortestPath(shortestPathInOrder);
-                    
                 }, 10 * i);
+                
                 return;
             }
+
+            
             setTimeout(() => {
                 const node = visitedNodesInOrder[i];
                 document.getElementById(`node-${node.row}-${node.col}`).className = "node node-visited"
             }, 10 * i);
-
-            
-        
         }
     }
 
@@ -59,25 +58,7 @@ function PathfindingVisualizer() {
             }, 20 * i);
         }
     } 
-
-    /*
-    function animateShortestPath(shortestPathInOrder) {
-        for(const node of shortestPathInOrder) {
-            const newGrid = grid.slice();
-            const newNode = {
-                ...node,
-                isShortestPath: true
-            }
-            newGrid[node.row][node.col] = newNode;
-            setTimeout(() => {
-                setGrid(newGrid);
-            }, 10)
-        }
-        console.log(grid);
-    }
-    */
-
-
+    
 
 
     function handleMouseDown(row, col) {
@@ -97,9 +78,10 @@ function PathfindingVisualizer() {
     }
 
     function restBoard() {
-        setGrid([]);
+        const visitedNodes = document.querySelectorAll(".node");
+        visitedNodes.forEach(node => node.className = "node");
         setGrid(createGrid());
-        console.log(grid);
+        
     }
 
 
@@ -118,7 +100,7 @@ function PathfindingVisualizer() {
                 return (
                     <div key={rowIndex}>
                         {row.map((node, nodeIndex) => {
-                            const {row, col, isStart, isFinish, isVisited, isWall, isShortestPath } = node;
+                            const {row, col, isStart, isFinish, isVisited, isWall } = node;
                             return (
                                 <Node 
                                     key={nodeIndex}
@@ -132,7 +114,6 @@ function PathfindingVisualizer() {
                                     onMouseDown={(row, col) => handleMouseDown(row, col)}
                                     onMouseEnter={(row, col) => handleMouseEnter(row, col)}
                                     onMouseUp={() => handleMouseUp()}
-                                    isShortestPath={isShortestPath}
                                 />
                                 )
                         })}
