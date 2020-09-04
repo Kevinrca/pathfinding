@@ -71,5 +71,15 @@ function getUnvisitedNeighbors(node, grid) {
     return neighbors.filter(neighbor => !neighbor.isVisited);
 }
 
+function getShortestPathInOrder(finishNode) {
+    let shortestPath = [];
+    let currentNode = finishNode;
+    while(currentNode !== null) {
+        shortestPath.unshift(currentNode);
+        currentNode = currentNode.previousNode;
+    }
+    return shortestPath;
+}
 
-export { dijkstra };
+
+export { dijkstra, getShortestPathInOrder };

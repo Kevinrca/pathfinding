@@ -51,6 +51,9 @@
     animation: wallAnimation 0.3s 0s ease both;
 }
 
+.node-shortest-path {
+    background-color: yellow;
+}
 
 
 

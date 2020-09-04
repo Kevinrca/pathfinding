@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../css/PathfindingVisualizer.css'
 import Node from './node.jsx';
 
-import { dijkstra } from '../algorithm/dijkstra'
+import { dijkstra, getShortestPathInOrder } from '../algorithm/dijkstra'
 
 const START_NODE_ROW = 9;
 const START_NODE_COL = 9;
@@ -27,21 +27,35 @@ function PathfindingVisualizer() {
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-        
-        animateDijkstra(visitedNodesInOrder);
+        const shortestPathInOrder = getShortestPathInOrder(finishNode);
+        animateDijkstra(visitedNodesInOrder, shortestPathInOrder);
     }
 
-    function animateDijkstra(visitedNodesInOrder) {
+    function animateDijkstra(visitedNodesInOrder, shortestPathInOrder) {
         for(let i = 0; i <= visitedNodesInOrder.length; i++) {
             if(i === visitedNodesInOrder.length) {
+                setTimeout(() => {
+                    animateShortestPath(shortestPathInOrder);
+                    
+                }, 10 * i);
                 return;
             }
-            
             setTimeout(() => {
                 const node = visitedNodesInOrder[i];
                 document.getElementById(`node-${node.row}-${node.col}`).className = "node node-visited"
             }, 10 * i);
+
+            
         
+        }
+    }
+
+    function animateShortestPath(shortestPathInOrder) {
+        for(let i = 0; i < shortestPathInOrder.length; i++) {
+            setTimeout(() => {
+                let node = shortestPathInOrder[i];
+                document.getElementById(`node-${node.row}-${node.col}`).className = "node node-shortest-path";
+            }, 20 * i);
         }
     }
 
