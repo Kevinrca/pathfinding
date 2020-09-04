@@ -50,6 +50,7 @@ function PathfindingVisualizer() {
         }
     }
 
+    
     function animateShortestPath(shortestPathInOrder) {
         for(let i = 0; i < shortestPathInOrder.length; i++) {
             setTimeout(() => {
@@ -57,7 +58,26 @@ function PathfindingVisualizer() {
                 document.getElementById(`node-${node.row}-${node.col}`).className = "node node-shortest-path";
             }, 20 * i);
         }
+    } 
+
+    /*
+    function animateShortestPath(shortestPathInOrder) {
+        for(const node of shortestPathInOrder) {
+            const newGrid = grid.slice();
+            const newNode = {
+                ...node,
+                isShortestPath: true
+            }
+            newGrid[node.row][node.col] = newNode;
+            setTimeout(() => {
+                setGrid(newGrid);
+            }, 10)
+        }
+        console.log(grid);
     }
+    */
+
+
 
 
     function handleMouseDown(row, col) {
@@ -76,7 +96,11 @@ function PathfindingVisualizer() {
         setMouseIsPressed(false);
     }
 
-    
+    function restBoard() {
+        setGrid([]);
+        setGrid(createGrid());
+        console.log(grid);
+    }
 
 
 
@@ -86,12 +110,15 @@ function PathfindingVisualizer() {
             <button onClick={() => vizualiseDijkstra()}>
                 Vizualise dijkstra algorithm
             </button>
+            <button onClick={() => restBoard()}>
+                Reset
+            </button>
 
             {grid.map((row, rowIndex) => {
                 return (
                     <div key={rowIndex}>
                         {row.map((node, nodeIndex) => {
-                            const {row, col, isStart, isFinish, isVisited, isWall } = node;
+                            const {row, col, isStart, isFinish, isVisited, isWall, isShortestPath } = node;
                             return (
                                 <Node 
                                     key={nodeIndex}
@@ -105,6 +132,7 @@ function PathfindingVisualizer() {
                                     onMouseDown={(row, col) => handleMouseDown(row, col)}
                                     onMouseEnter={(row, col) => handleMouseEnter(row, col)}
                                     onMouseUp={() => handleMouseUp()}
+                                    isShortestPath={isShortestPath}
                                 />
                                 )
                         })}
@@ -151,7 +179,8 @@ function createNode(row, col) {
         isWall: false,
         onMouseDown: false,
         onMouseEnter: false,
-        onMouseUp: false
+        onMouseUp: false,
+        isShortestPath: false
     }
 }
 

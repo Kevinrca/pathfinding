@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/Node.css'
 
-function Node({ row, col, isStart, isFinish, isVisited, isWall, onMouseDown, onMouseEnter, onMouseUp }) {
+function Node({ row, col, isStart, isFinish, isVisited, isWall, onMouseDown, onMouseEnter, onMouseUp, isShortestPath }) {
     const extendedClassName = isStart 
         ? "start-node" 
         : isFinish 
@@ -10,6 +10,8 @@ function Node({ row, col, isStart, isFinish, isVisited, isWall, onMouseDown, onM
         ? "node-visited" 
         : isWall 
         ? "node-wall"
+        : isShortestPath
+        ? "node-shortest-path"
         : "";
 
     return (
