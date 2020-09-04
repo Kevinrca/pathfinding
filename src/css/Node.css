@@ -16,6 +16,8 @@
     background-color: rgb(241, 137, 19);
 }
 
+
+
 .node-visited {
     position: relative;
     
@@ -30,8 +32,10 @@
     transform: scale(0);
     border-radius: 50%;
 
-    animation: visitedTransition 0.5s 0s ease both;
+    animation: visitedTransition 0.8s 0s ease both;
 }
+
+
 
 .node-wall {
     position: relative;
@@ -51,6 +55,8 @@
     animation: wallAnimation 0.3s 0s ease both;
 }
 
+
+
 .node-shortest-path {
     position: relative;
 }
@@ -61,11 +67,11 @@
     height: 100%;
     margin: 0;
     background-color: rgb(235, 235, 35);
-    transform: scale(0.4);
-    border-radius: 30%;
+    transform: scale(0.6);
 
-    animation: animateShortestPath 0.3s 0s ease both;
+    animation: animateShortestPath 0.2s 0s ease both;
 }
+
 
 
 
@@ -90,6 +96,9 @@
     0% {
         transform: scale(0.3);
     }
+    60% {
+        transform: scale(1.2);
+    }
     100% {
         transform: scale(1);
     }
@@ -97,11 +106,12 @@
 
 @keyframes animateShortestPath {
     0% {
-        transform: scale(0.4);
-        border-radius: 30%;
+        transform: scale(0.6);
+    }
+    50% {
+        transform: scale(1.1);
     }
     100% {
         transform: scale(1);
-        border-radius: 0%;
     }
 }
