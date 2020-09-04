@@ -76,6 +76,8 @@ function PathfindingVisualizer() {
         setMouseIsPressed(false);
     }
 
+    
+
 
 
     // Render
