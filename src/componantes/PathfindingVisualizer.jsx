@@ -77,13 +77,6 @@ function PathfindingVisualizer() {
         setMouseIsPressed(false);
     }
 
-    function restBoard() {
-        const visitedNodes = document.querySelectorAll(".node");
-        visitedNodes.forEach(node => node.className = "node");
-        setGrid(createGrid());
-        
-    }
-
 
 
     // Render
@@ -91,9 +84,6 @@ function PathfindingVisualizer() {
         <div className="Pathfinding">
             <button onClick={() => vizualiseDijkstra()}>
                 Vizualise dijkstra algorithm
-            </button>
-            <button onClick={() => restBoard()}>
-                Reset
             </button>
 
             {grid.map((row, rowIndex) => {
