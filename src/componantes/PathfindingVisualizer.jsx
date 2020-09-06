@@ -162,6 +162,9 @@ function CreateNewGridWithWalls(grid, row, col) {
         ...node,
         isWall: !node.isWall
     };
+    if(newNode.isStart || newNode.isFinish) {
+        newNode.isWall = false;
+    }
     newGrid[row][col] = newNode;
     return newGrid;
 }
