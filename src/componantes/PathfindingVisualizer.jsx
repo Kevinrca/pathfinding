@@ -64,21 +64,36 @@ function PathfindingVisualizer() {
     function handleMouseDown(row, col) {
         setMouseIsPressed(true);
         
-        if(grid[row][col].isStart || grid[row][col].isFinish) {
+        if(grid[row][col].isStart) {
+            // TODO: handle start node change
             return;
         }
-        const newGrid = CreateNewGridWithWalls(grid, row, col);
-        setGrid(newGrid);
+        else if(grid[row][col].isFinish) {
+            // TODO: handle finish node change
+            return;
+        }
+        else {
+            const newGrid = CreateNewGridWithWalls(grid, row, col);
+            setGrid(newGrid);
+        }
+        
     }
 
     function handleMouseEnter(row, col) {
         if(!mouseIsPressed) return;
 
-        if(grid[row][col].isStart || grid[row][col].isFinish) {
+        if(grid[row][col].isStart) {
+            // TODO: handle start node change
             return;
         }
-        const newGrid = CreateNewGridWithWalls(grid, row, col);
-        setGrid(newGrid);
+        else if(grid[row][col].isFinish) {
+            // TODO: handle finish node change
+            return;
+        }
+        else {
+            const newGrid = CreateNewGridWithWalls(grid, row, col);
+            setGrid(newGrid);
+        }
     }
 
     function handleMouseUp() {
@@ -169,6 +184,18 @@ function CreateNewGridWithWalls(grid, row, col) {
     const newNode = {
         ...node,
         isWall: !node.isWall
+    };
+    
+    newGrid[row][col] = newNode;
+    return newGrid;
+}
+
+function changeStartNode(grid, row, col) {
+    const newGrid = grid.slice();
+    const node = newGrid[row][col];
+    const newNode = {
+        ...node,
+        isStart: true
     };
     
     newGrid[row][col] = newNode;
