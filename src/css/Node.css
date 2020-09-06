@@ -59,6 +59,8 @@
 
 .node-shortest-path {
     position: relative;
+    border: 1px rgb(235, 235, 35) solid;
+    background-color: white;
 }
 .node-shortest-path::after {
     content: "";
