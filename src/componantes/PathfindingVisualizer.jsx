@@ -63,12 +63,20 @@ function PathfindingVisualizer() {
 
     function handleMouseDown(row, col) {
         setMouseIsPressed(true);
+        
+        if(grid[row][col].isStart || grid[row][col].isFinish) {
+            return;
+        }
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
     }
 
     function handleMouseEnter(row, col) {
         if(!mouseIsPressed) return;
+
+        if(grid[row][col].isStart || grid[row][col].isFinish) {
+            return;
+        }
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
     }
@@ -162,9 +170,7 @@ function CreateNewGridWithWalls(grid, row, col) {
         ...node,
         isWall: !node.isWall
     };
-    if(newNode.isStart || newNode.isFinish) {
-        newNode.isWall = false;
-    }
+    
     newGrid[row][col] = newNode;
     return newGrid;
 }
