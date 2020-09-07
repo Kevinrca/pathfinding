@@ -64,40 +64,23 @@ function PathfindingVisualizer() {
     function handleMouseDown(row, col) {
         setMouseIsPressed(true);
         
-        if(grid[row][col].isStart) {
-            // TODO: handle start node change
-            return;
-        }
-        else if(grid[row][col].isFinish) {
-            // TODO: handle finish node change
-            return;
-        }
-        else {
-            const newGrid = CreateNewGridWithWalls(grid, row, col);
-            setGrid(newGrid);
-        }
-        
+        const newGrid = CreateNewGridWithWalls(grid, row, col);
+        setGrid(newGrid);
     }
 
     function handleMouseEnter(row, col) {
         if(!mouseIsPressed) return;
 
-        if(grid[row][col].isStart) {
-            // TODO: handle start node change
-            return;
-        }
-        else if(grid[row][col].isFinish) {
-            // TODO: handle finish node change
-            return;
-        }
-        else {
-            const newGrid = CreateNewGridWithWalls(grid, row, col);
-            setGrid(newGrid);
-        }
+        const newGrid = CreateNewGridWithWalls(grid, row, col);
+        setGrid(newGrid);
     }
 
     function handleMouseUp() {
         setMouseIsPressed(false);
+    }
+
+    function handleStartNodeChange(row, col) {
+        return;
     }
 
 
@@ -124,8 +107,14 @@ function PathfindingVisualizer() {
                                     isVisited={isVisited}
                                     isWall={isWall}
                                     mouseIsPressed={mouseIsPressed}
-                                    onMouseDown={(row, col) => handleMouseDown(row, col)}
-                                    onMouseEnter={(row, col) => handleMouseEnter(row, col)}
+                                    onMouseDown={(row, col) => {
+                                        if(!isStart && !isFinish) handleMouseDown(row, col);
+                                        else handleStartNodeChange(row, col);
+                                    }}
+                                    onMouseEnter={(row, col) => {
+                                        if(!isStart && !isFinish) handleMouseEnter(row, col) ;
+                                        else handleStartNodeChange(row, col);
+                                    }}
                                     onMouseUp={() => handleMouseUp()}
                                 />
                                 )
