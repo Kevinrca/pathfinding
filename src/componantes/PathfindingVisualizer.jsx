@@ -61,14 +61,14 @@ function PathfindingVisualizer() {
     
 
 
-    function handleMouseDown(row, col) {
+    function handleMouseDownToCreateWall(row, col) {
         setMouseIsPressed(true);
         
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
     }
 
-    function handleMouseEnter(row, col) {
+    function handleMouseEnterToCreateWall(row, col) {
         if(!mouseIsPressed) return;
 
         const newGrid = CreateNewGridWithWalls(grid, row, col);
@@ -108,11 +108,11 @@ function PathfindingVisualizer() {
                                     isWall={isWall}
                                     mouseIsPressed={mouseIsPressed}
                                     onMouseDown={(row, col) => {
-                                        if(!isStart && !isFinish) handleMouseDown(row, col);
+                                        if(!isStart && !isFinish) handleMouseDownToCreateWall(row, col);
                                         else handleStartNodeChange(row, col);
                                     }}
                                     onMouseEnter={(row, col) => {
-                                        if(!isStart && !isFinish) handleMouseEnter(row, col) ;
+                                        if(!isStart && !isFinish) handleMouseEnterToCreateWall(row, col) ;
                                         else handleStartNodeChange(row, col);
                                     }}
                                     onMouseUp={() => handleMouseUp()}
