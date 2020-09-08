@@ -61,27 +61,38 @@ function PathfindingVisualizer() {
     
 
 
-    function handleMouseDownToCreateWall(row, col) {
+    function handleMouseDown(row, col) {
         setMouseIsPressed(true);
+
+        if(grid[row][col].isStart || grid[row][col].isFinish) return;
         
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
     }
 
-    function handleMouseEnterToCreateWall(row, col) {
+    function handleMouseEnter(row, col) {
         if(!mouseIsPressed) return;
+        if(grid[row][col].isStart || grid[row][col].isFinish) return;
 
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
     }
 
+
     function handleMouseUp() {
         setMouseIsPressed(false);
     }
 
-    function handleStartNodeChange(row, col) {
+
+    function changeStartNode() {
         return;
     }
+
+    function changeFinishNode() {
+        return;
+    }
+
+    
 
 
 
@@ -91,6 +102,15 @@ function PathfindingVisualizer() {
             <button onClick={() => vizualiseDijkstra()}>
                 Vizualise dijkstra algorithm
             </button>
+
+            <div>
+                <button onClick={() => changeStartNode()}>
+                    Select start node
+                </button>
+                <button onClick={() => changeFinishNode()}>
+                    Select finish node
+                </button>
+            </div>
 
             {grid.map((row, rowIndex) => {
                 return (
@@ -107,14 +127,8 @@ function PathfindingVisualizer() {
                                     isVisited={isVisited}
                                     isWall={isWall}
                                     mouseIsPressed={mouseIsPressed}
-                                    onMouseDown={(row, col) => {
-                                        if(!isStart && !isFinish) handleMouseDownToCreateWall(row, col);
-                                        else handleStartNodeChange(row, col);
-                                    }}
-                                    onMouseEnter={(row, col) => {
-                                        if(!isStart && !isFinish) handleMouseEnterToCreateWall(row, col) ;
-                                        else handleStartNodeChange(row, col);
-                                    }}
+                                    onMouseDown={(row, col) => handleMouseDown(row, col)}
+                                    onMouseEnter={(row, col) => handleMouseEnter(row, col)}
                                     onMouseUp={() => handleMouseUp()}
                                 />
                                 )
