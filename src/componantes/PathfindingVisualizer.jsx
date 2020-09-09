@@ -4,10 +4,10 @@ import Node from './node.jsx';
 
 import { dijkstra, getShortestPathInOrder } from '../algorithm/dijkstra'
 
-const START_NODE_ROW = 9;
-const START_NODE_COL = 9;
-const FINISH_NODE_ROW = 9;
-const FINISH_NODE_COL = 39;
+let START_NODE_ROW = 9;
+let START_NODE_COL = 9;
+let FINISH_NODE_ROW = 9;
+let FINISH_NODE_COL = 39;
 
 
 
@@ -66,6 +66,11 @@ function PathfindingVisualizer() {
         setMouseIsPressed(true);
 
         if(grid[row][col].isStart || grid[row][col].isFinish) return;
+        if(changeStartNodeToggle === true) {
+            START_NODE_ROW = row;
+            START_NODE_COL = col;
+            setGrid(createGrid());
+        }
         
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
@@ -194,7 +199,7 @@ function CreateNewGridWithWalls(grid, row, col) {
     return newGrid;
 }
 
-function changeStartNode(grid, row, col) {
+function createNewGridWithStartNode(grid, row, col) {
     const newGrid = grid.slice();
     const node = newGrid[row][col];
     const newNode = {
