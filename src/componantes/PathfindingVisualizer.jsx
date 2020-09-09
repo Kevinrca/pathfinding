@@ -15,6 +15,7 @@ function PathfindingVisualizer() {
     // Variables
     const [grid, setGrid] = useState([]);
     const [mouseIsPressed, setMouseIsPressed] = useState(false);
+    const [changeStartNodeToggle, setChangeStartNodeToggle] = useState(false);
 
 
     // Create a grid of nodes
@@ -85,7 +86,7 @@ function PathfindingVisualizer() {
 
 
     function changeStartNode() {
-        return;
+        setChangeStartNodeToggle(true);
     }
 
     function changeFinishNode() {
