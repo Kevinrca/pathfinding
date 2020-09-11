@@ -27,6 +27,7 @@ function PathfindingVisualizer() {
     function vizualiseDijkstra() {
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+
         const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
         const shortestPathInOrder = getShortestPathInOrder(finishNode);
         animateDijkstra(visitedNodesInOrder, shortestPathInOrder);
@@ -68,7 +69,9 @@ function PathfindingVisualizer() {
         if(grid[row][col].isStart || grid[row][col].isFinish) return;
         if(changeStartNodeToggle === true) {
             createNewGridWithStartNode(grid, row, col);
-            
+            START_NODE_ROW = row;
+            START_NODE_COL = col;
+            return;
         }
         
         const newGrid = CreateNewGridWithWalls(grid, row, col);
@@ -78,6 +81,12 @@ function PathfindingVisualizer() {
     function handleMouseEnter(row, col) {
         if(!mouseIsPressed) return;
         if(grid[row][col].isStart || grid[row][col].isFinish) return;
+        if(changeStartNodeToggle === true) {
+            createNewGridWithStartNode(grid, row, col);
+            START_NODE_ROW = row;
+            START_NODE_COL = col;
+            return;
+        }
 
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
