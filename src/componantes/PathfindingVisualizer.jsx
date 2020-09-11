@@ -222,6 +222,11 @@ function CreateNewGridWithWalls(grid, row, col) {
     return newGrid;
 }
 
+
+
+// handle changing the start node 
+// by searching the current start node, 
+// remove it and set the new start node
 function createNewGridWithStartNode(grid, row, col) {
     const newGrid = grid.slice();
 
@@ -233,7 +238,6 @@ function createNewGridWithStartNode(grid, row, col) {
         }
     }
     
-    
     const node = newGrid[row][col];
     const newNode = {
         ...node,
@@ -244,6 +248,9 @@ function createNewGridWithStartNode(grid, row, col) {
     return newGrid;
 }
 
+// handle changing the finish node 
+// by searching the current finish node, 
+// remove it and set the new finish node
 function createNewGridWithFinishNode(grid, row, col) {
     const newGrid = grid.slice();
 
