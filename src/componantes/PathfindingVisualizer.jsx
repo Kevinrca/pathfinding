@@ -134,10 +134,10 @@ function PathfindingVisualizer() {
 
             <div>
                 <button onClick={() => changeStartNode()}>
-                    Select start node
+                    Change start node
                 </button>
                 <button onClick={() => changeFinishNode()}>
-                    Select finish node
+                    Change finish node
                 </button>
             </div>
 
