@@ -112,18 +112,7 @@ function PathfindingVisualizer() {
         setchangeFinishNodeToggle(false)
     }
 
-
-    function changeStartNode() {
-        setChangeStartNodeToggle(true);
-    }
-
-    function changeFinishNode() {
-        setchangeFinishNodeToggle(true);
-    }
-
     
-
-
 
     // Render
     return (
@@ -133,10 +122,10 @@ function PathfindingVisualizer() {
             </button>
 
             <div>
-                <button onClick={() => changeStartNode()}>
+                <button onClick={() => setChangeStartNodeToggle(true)}>
                     Change start node
                 </button>
-                <button onClick={() => changeFinishNode()}>
+                <button onClick={() => setchangeFinishNodeToggle(true)}>
                     Change finish node
                 </button>
             </div>
