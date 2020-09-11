@@ -67,9 +67,8 @@ function PathfindingVisualizer() {
 
         if(grid[row][col].isStart || grid[row][col].isFinish) return;
         if(changeStartNodeToggle === true) {
-            START_NODE_ROW = row;
-            START_NODE_COL = col;
-            setGrid(createGrid());
+            createNewGridWithStartNode(grid, row, col);
+            
         }
         
         const newGrid = CreateNewGridWithWalls(grid, row, col);
@@ -87,6 +86,7 @@ function PathfindingVisualizer() {
 
     function handleMouseUp() {
         setMouseIsPressed(false);
+        setChangeStartNodeToggle(false);
     }
 
 
@@ -201,6 +201,16 @@ function CreateNewGridWithWalls(grid, row, col) {
 
 function createNewGridWithStartNode(grid, row, col) {
     const newGrid = grid.slice();
+
+    for(let i = 0; i < newGrid.length; i++) {
+        for(let y = 0; y < newGrid[i].length; y++) {
+            if(newGrid[i][y].isStart) {
+                newGrid[i][y].isStart = false;
+            }
+        }
+    }
+    
+    
     const node = newGrid[row][col];
     const newNode = {
         ...node,
