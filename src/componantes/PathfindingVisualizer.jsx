@@ -112,7 +112,7 @@ function PathfindingVisualizer() {
         setchangeFinishNodeToggle(false)
     }
 
-    function resetBoard() {
+    function resetBoard(grid) {
         return;
     }
 
@@ -129,7 +129,7 @@ function PathfindingVisualizer() {
                 Reset
             </button>
 
-            <div>
+            <div className="changeStartAndFinishNode">
                 <button onClick={() => setChangeStartNodeToggle(true)}>
                     Change start node
                 </button>
