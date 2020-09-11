@@ -16,6 +16,7 @@ function PathfindingVisualizer() {
     const [grid, setGrid] = useState([]);
     const [mouseIsPressed, setMouseIsPressed] = useState(false);
     const [changeStartNodeToggle, setChangeStartNodeToggle] = useState(false);
+    const [changeFinishNodeToggle, setchangeFinishNodeToggle] = useState(false);
 
 
     // Create a grid of nodes
@@ -73,6 +74,12 @@ function PathfindingVisualizer() {
             START_NODE_COL = col;
             return;
         }
+        if(changeFinishNodeToggle === true) {
+            createNewGridWithFinishNode(grid, row, col)
+            FINISH_NODE_ROW = row;
+            FINISH_NODE_COL = col;
+            return;
+        }
         
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
@@ -87,6 +94,12 @@ function PathfindingVisualizer() {
             START_NODE_COL = col;
             return;
         }
+        if(changeFinishNodeToggle === true) {
+            createNewGridWithFinishNode(grid, row, col)
+            FINISH_NODE_ROW = row;
+            FINISH_NODE_COL = col;
+            return;
+        }
 
         const newGrid = CreateNewGridWithWalls(grid, row, col);
         setGrid(newGrid);
@@ -96,6 +109,7 @@ function PathfindingVisualizer() {
     function handleMouseUp() {
         setMouseIsPressed(false);
         setChangeStartNodeToggle(false);
+        setchangeFinishNodeToggle(false)
     }
 
 
@@ -104,7 +118,7 @@ function PathfindingVisualizer() {
     }
 
     function changeFinishNode() {
-        return;
+        setchangeFinishNodeToggle(true);
     }
 
     
@@ -224,6 +238,27 @@ function createNewGridWithStartNode(grid, row, col) {
     const newNode = {
         ...node,
         isStart: true
+    };
+    
+    newGrid[row][col] = newNode;
+    return newGrid;
+}
+
+function createNewGridWithFinishNode(grid, row, col) {
+    const newGrid = grid.slice();
+
+    for(let i = 0; i < newGrid.length; i++) {
+        for(let y = 0; y < newGrid[i].length; y++) {
+            if(newGrid[i][y].isFinish) {
+                newGrid[i][y].isFinish = false;
+            }
+        }
+    }
+    
+    const node = newGrid[row][col];
+    const newNode = {
+        ...node,
+        isFinish: true
     };
     
     newGrid[row][col] = newNode;
