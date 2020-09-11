@@ -112,6 +112,10 @@ function PathfindingVisualizer() {
         setchangeFinishNodeToggle(false)
     }
 
+    function resetBoard() {
+        return;
+    }
+
     
 
     // Render
@@ -119,6 +123,10 @@ function PathfindingVisualizer() {
         <div className="Pathfinding">
             <button onClick={() => vizualiseDijkstra()}>
                 Vizualise dijkstra algorithm
+            </button>
+
+            <button onClick={() => resetBoard()}>
+                Reset
             </button>
 
             <div>
