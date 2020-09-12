@@ -67,7 +67,14 @@ function PathfindingVisualizer() {
     function handleMouseDown(row, col) {
         setMouseIsPressed(true);
 
-        if(grid[row][col].isStart || grid[row][col].isFinish) return;
+        if(grid[row][col].isStart) {
+            setChangeStartNodeToggle(true);
+        }
+        if(grid[row][col].isFinish) {
+            setchangeFinishNodeToggle(true);
+        }
+
+        
         if(changeStartNodeToggle === true) {
             createNewGridWithStartNode(grid, row, col);
             START_NODE_ROW = row;
@@ -87,7 +94,14 @@ function PathfindingVisualizer() {
 
     function handleMouseEnter(row, col) {
         if(!mouseIsPressed) return;
-        if(grid[row][col].isStart || grid[row][col].isFinish) return;
+
+        if(grid[row][col].isStart) {
+            setChangeStartNodeToggle(true);
+        }
+        if(grid[row][col].isFinish) {
+            setchangeFinishNodeToggle(true);
+        }
+        
         if(changeStartNodeToggle === true) {
             createNewGridWithStartNode(grid, row, col);
             START_NODE_ROW = row;
