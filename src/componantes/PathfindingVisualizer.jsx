@@ -43,7 +43,6 @@ function PathfindingVisualizer() {
                 
                 return;
             }
-
             
             setTimeout(() => {
                 const node = visitedNodesInOrder[i];
@@ -52,7 +51,6 @@ function PathfindingVisualizer() {
         }
     }
 
-    
     function animateShortestPath(shortestPathInOrder) {
         for(let i = 0; i < shortestPathInOrder.length; i++) {
             setTimeout(() => {
